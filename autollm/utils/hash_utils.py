@@ -50,10 +50,10 @@ def check_for_changes(documents: Sequence[Document], vs) -> Tuple[Sequence[Docum
         current_hash = get_md5(Path(file_path))
 
         # Add
-        if file_path not in original_file_names:
-            changed_documents.append(doc)
-        # Update
-        elif current_hash not in last_hashes:
+        if (
+            file_path not in original_file_names
+            or current_hash not in last_hashes
+        ):
             changed_documents.append(doc)
         else:
             # remove from deleted set
