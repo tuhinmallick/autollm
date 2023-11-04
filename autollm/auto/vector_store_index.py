@@ -21,8 +21,7 @@ def import_vector_store_class(vector_store_class_name: str):
         The imported VectorStore class.
     """
     module = __import__("llama_index.vector_stores", fromlist=[vector_store_class_name])
-    class_ = getattr(module, vector_store_class_name)
-    return class_
+    return getattr(module, vector_store_class_name)
 
 
 class AutoVectorStoreIndex:

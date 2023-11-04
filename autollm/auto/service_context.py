@@ -54,12 +54,11 @@ class AutoServiceContext:
             model = llm.metadata.model_name if not "default" else "gpt-3.5-turbo"
             callback_manager.add_handler(CostCalculatingHandler(model=model, verbose=True))
 
-        service_context = ServiceContext.from_defaults(
+        return ServiceContext.from_defaults(
             llm=llm,
             embed_model=embed_model,
             system_prompt=system_prompt,
             query_wrapper_prompt=query_wrapper_prompt,
             callback_manager=callback_manager,
-            **kwargs)
-
-        return service_context
+            **kwargs
+        )

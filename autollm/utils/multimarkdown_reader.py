@@ -34,20 +34,16 @@ class MultiMarkdownReader(MarkdownReader):
         if extra_info is None:
             extra_info = {}
 
-        relative_file_path = str(file)
-
-        if self.read_as_single_doc:
-            # Reading entire markdown as a single document
-            with open(file, encoding='utf-8') as f:
-                content = f.read()
-            if self._remove_hyperlinks:
-                content = self.remove_hyperlinks(content)
-            if self._remove_images:
-                content = self.remove_images(content)
-            # Generate doc_id as file name
-            doc_id = relative_file_path
-
-            return [Document(id_=doc_id, text=content, metadata=extra_info)]
-        else:
+        if not self.read_as_single_doc:
             # Call parent's load_data method for section-based reading
             return super().load_data(file, extra_info, content)
+        # Reading entire markdown as a single document
+        with open(file, encoding='utf-8') as f:
+            content = f.read()
+        if self._remove_hyperlinks:
+            content = self.remove_hyperlinks(content)
+        if self._remove_images:
+            content = self.remove_images(content)
+        relative_file_path = str(file)
+
+        return [Document(id_=relative_file_path, text=content, metadata=extra_info)]

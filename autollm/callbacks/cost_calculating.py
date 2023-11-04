@@ -165,14 +165,14 @@ class CostCalculatingHandler(TokenCountingHandler):
     @property
     def total_llm_token_cost(self) -> int:
         """Get the current total LLM token cost."""
-        return sum([x.total_token_cost for x in self.llm_token_costs])
+        return sum(x.total_token_cost for x in self.llm_token_costs)
 
     @property
     def prompt_llm_token_cost(self) -> int:
         """Get the current total LLM prompt token cost."""
-        return sum([x.prompt_token_cost for x in self.llm_token_costs])
+        return sum(x.prompt_token_cost for x in self.llm_token_costs)
 
     @property
     def completion_llm_token_cost(self) -> int:
         """Get the current total LLM completion token cost."""
-        return sum([x.completion_token_cost for x in self.llm_token_costs])
+        return sum(x.completion_token_cost for x in self.llm_token_costs)
